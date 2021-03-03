@@ -12,7 +12,6 @@ const mix = require('laravel-mix');
  */
 mix.styles([
     'resources/views/admin/vendor/nucleo/css/nucleo.css',
-    'resources/views/admin/vendor/@fortawesome/fontawesome-free/css/all.min.css',
     'resources/views/admin/css/argon.css',
 ], 'public/site/css/style.css')
 

@@ -11,12 +11,21 @@ if (App::environment('production')) {
 /**
 * ROTA INICIAL
 */
-Route::get('/', 'DashboardController@telaInicial')->name('telaInicial');
+Route::get('/', 'LoginController@telaLogin')->name('telaLogin');
+
+/**
+ * ROTA RESPONSAVEL PELO DASHBOARD
+ */
+Route::get('/admin', 'DashboardController@telaInicial')->name('telaInicial');
 
 /** 
-* ROTAS RESPONSAVEIS PELO GROUND
+* ROTAS RESPONSAVEIS PELO PACIENTE
 */
-Route::post('/saveGround', 'GroundController@saveGround')->name('saveGround');
+Route::get('/admin/formPatient', 'PatientController@viewFormPatient')->name('formPatient');
+Route::get('/admin/patient', 'PatientController@listPatient')->name('listPatient');
+Route::post('/admin/savePatient', 'PatientController@savePatient')->name('savePatient');
+Route::put('/admin/updatePatient', 'PatientController@updatePatient')->name('updatePatient');
+Route::delete('/admin/delPatient', 'PatientController@delPatient')->name('delPatient');
 
 
 /**
