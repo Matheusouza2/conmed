@@ -21,8 +21,8 @@ Route::get('/admin', 'DashboardController@telaInicial')->name('telaInicial');
 /** 
 * ROTAS RESPONSAVEIS PELO PACIENTE
 */
-Route::get('/admin/formPatient', 'PatientController@viewFormPatient')->name('formPatient');
-Route::get('/admin/patient', 'PatientController@listPatient')->name('listPatient');
+Route::get('/admin/cadastroPaciente', 'PatientController@viewFormPatient')->name('formPatient');
+Route::get('/admin/paciente', 'PatientController@listPatient')->name('listPatient');
 Route::post('/admin/savePatient', 'PatientController@savePatient')->name('savePatient');
 Route::put('/admin/updatePatient', 'PatientController@updatePatient')->name('updatePatient');
 Route::delete('/admin/delPatient', 'PatientController@delPatient')->name('delPatient');

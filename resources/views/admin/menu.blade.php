@@ -18,15 +18,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/admin/patient" id="patient">
+              <a class="nav-link" href="/admin/paciente" id="patient">
                 <i class="ni ni-single-02 text-orange"></i>
                 <span class="nav-link-text">Paciente</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="examples/map.html">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Google</span>
+                <i class="ni ni-ambulance text-red"></i>
+                <span class="nav-link-text">Convênios</span>
               </a>
             </li>
             <li class="nav-item">

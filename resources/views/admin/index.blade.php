@@ -270,7 +270,7 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="/admin/formPatient" class="btn btn-sm btn-neutral">Novo Paciente</a>
+              <a href="/admin/cadastroPatient" class="btn btn-sm btn-neutral">Novo Paciente</a>
               <a href="#" class="btn btn-sm btn-neutral">Agendar Consulta</a>
             </div>
           </div>

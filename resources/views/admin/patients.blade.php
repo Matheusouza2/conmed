@@ -21,7 +21,7 @@
   <link rel="icon" href="{{ asset('site/images/brand/favicon.png') }}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
   <!-- Page plugins --> 
   <!-- Argon CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
@@ -257,188 +257,89 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-size: cover; background-position: center top;">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-8"></span>
-      <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Olá Operador</h1>
-            <p class="text-white mt-0 mb-5">Aqui você vai fazer o cadastro dos pacientes, não esqueça de preencher todos os campos importantes (*)</p>
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--8">
+    <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col-xl-12 order-xl-1">
+        <div class="col">
           <div class="card">
-            <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h2 class="mb-0">Cadastro de paciente</h2>
-                </div>
-              </div>
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Light table</h3>
             </div>
-            <div class="card-body">
-              <form action="{{ route('savePatient') }}" method="post" class="needs-validation" novalidate>
-                @csrf
-                <h6 class="heading-small text-muted mb-4">Informações pessoais</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="nome">Nome *</label>
-                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome completo" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
+            <!-- Light table -->
+            <div class="table-responsive">
+            <table id="myTable" class="table align-items-center table-flush" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            @foreach($patients as $patient)
+            <tr>
+                <td>{{$patient->nome}}</td>
+                <td>{{ $patient->datanascimento }}</td>
+                <td>{{ $patient->convenio }}</td>
+                <td>{{ $patient->nome }}</td>
+                <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="nomesocial">Nome Social</label>
-                        <input type="text" id="nomesocial" name="nomesocial" class="form-control" placeholder="Como o(a) paciente prefere ser chamado(a)">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="cpf">CPF *</label>
-                        <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="datanascimento">Data de Nascimento *</label>
-                        <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="Data de Nascimento" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="idade">Idade</label>
-                        <input type="text" id="idade" name="idade" class="form-control" readonly="true">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Informações de contato</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="cep">Cep *</label>
-                        <input type="text" id="cep" name="cep" class="form-control" placeholder="Digite o cep e aguarde até o sistema preencher o endereço" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-10">
-                      <div class="form-group">
-                        <label class="form-control-label" for="logradouro">Logradouro *</label>
-                        <input id="logradouro" name="logradouro" class="form-control" placeholder="Rua Av. Tv." type="text" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="numero">Número</label>
-                        <input id="numero" name="numero" class="form-control" placeholder="Numero da casa" type="number">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="bairro">Bairro *</label>
-                        <input type="text" id="bairro" name="bairro" class="form-control" placeholder="Bairro" required>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="cidade">Cidade</label>
-                        <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="uf">UF</label>
-                        <input type="text" id="uf" name="uf" class="form-control" placeholder="UF">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="telefone">Telefone</label>
-                        <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Número de contato">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Informações Extras</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="convenio">Convênio *</label>
-                        <select class="form-control" name="convenio" required>
-                          <option value="">Selecione um Convenio</option>
-                          <option value="dinheiro">Dinheiro</option>
-                          <option value="unimed">UNIMED</option>
-                          <option value="amil">AMIL</option>
-                          <option value="geap">GEAP</option>
-                          <option value="bradesco">Bradesco Saúde</option>
-                          <option value="bradesco">SUS</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Campo de preenchimento obrigatório
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="numeroconvenio">Número do Convênio</label>
-                        <input type="text" id="numeroconvenio" name="numeroconvenio" placeholder="Digite o numero do convênio" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label">Observações</label>
-                      <textarea rows="4" class="form-control" placeholder="Digite aqui qualquer informação sobre o paciente que você julgue nescessária"></textarea>
-                    </div>
-                  </div>  
-                </div>
-                <div class="text-right">
-                  <button type="submit" class="btn btn-success my-4">Salvar cadastro</button>
-                </div>
-              </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
             </div>
           </div>
         </div>
       </div>
+      
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -471,30 +372,26 @@
   <script src="{{ mix('site/js/script.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="{{ asset('site/js/formPatientValidation.js') }}"></script>
-  <script src="{{ asset('site/js/buscarcep.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
   <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-  </script>  
+    $(document).ready( function () {
+    $('#myTable').DataTable( {
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+      }
+    } );
+      } );
+  </script>
+    @if(session('mensage'))
+        <script>
+          Swal.fire(
+            'Sucesso!',
+            '{{session('mensage')}}',
+            'success'
+          );
+        </script>
+    @endif
+  
 </body>
-
 </html>
