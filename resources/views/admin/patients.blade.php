@@ -273,8 +273,7 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+              <a href="{{ route('formPatient') }}" class="btn btn-sm btn-neutral">Novo Paciente</a>
             </div>
           </div>
         </div>
@@ -294,30 +293,30 @@
             <table id="myTable" class="table align-items-center table-flush" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Nome</th>
+                <th>Convênio</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th style="width: 1em;">Ações</th>
             </tr>
         </thead>
         <tbody class="list">
             @foreach($patients as $patient)
             <tr>
                 <td>{{$patient->nome}}</td>
-                <td>{{ $patient->datanascimento }}</td>
                 <td>{{ $patient->convenio }}</td>
-                <td>{{ $patient->nome }}</td>
+                <td>{{ date( 'd/m/Y' , strtotime($patient->datanascimento)) }}</td>
+                <td>{{ $patient->cpf }}</td>
+                <td>{{ $patient->telefone }}</td>
                 <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
+                          <a class="dropdown-item" href="#">Ver / Editar</a>
+                          <a class="dropdown-item" href="#">Desativa Paciente</a>
                         </div>
                       </div>
                 </td>
@@ -326,12 +325,12 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Nome</th>
+                <th>Convênio</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th style="width: 1em;">Ações</th>
             </tr>
         </tfoot>
     </table>
@@ -374,6 +373,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <script src="{{ asset('site/js/menu.js') }}"></script>
   <script>
     $(document).ready( function () {
     $('#myTable').DataTable( {

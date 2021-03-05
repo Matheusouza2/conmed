@@ -13,20 +13,48 @@ $('#cep').mask('00000-000');
       prevText: 'Anterior'
     });
 
-    document.getElementById('datanascimento').onblur = function () {
-      var dataAtual = new Date();
-      dataAtual.setMonth(dataAtual.getMonth());
-      var data = $('#datanascimento').val().split('/');
-      var dataFormat = data[1] +'/'+ data[0] +'/'+ data[2];
-      var dataNascimento = new Date(dataFormat);
-      ano = dataAtual.getFullYear() - dataNascimento.getFullYear();
-      if(dataAtual.getMonth() < dataNascimento.getMonth()){
-        ano--;
+    $('#cpf').blur(function () {
+      cpf = $(this).val().replace(/\D/g, '');
+      var Soma;
+      var Resto;
+      Soma = 0;
+      if (cpf == ''){
+          Swal.fire({icon: 'error', title: 'ERRO...', text: 'CPF em branco, por favor preencha o campo cpf !'});
+          return;
       }
-      console.log(ano);
-      if(ano > 0){
-        $('#idade').val(ano+' Anos');
-      }else{
-        $('#idade').val('');
+      if (cpf.length != 11){
+          Swal.fire({icon: 'error', title: 'ERRO...', text: 'CPF invalido verifique se todos os numeros foram digitados !'});
+          return;
       }
-    }
+
+      // Elimina cpfs invalidos conhecidos
+      if (cpf == "00000000000" ||
+          cpf == "11111111111" ||
+          cpf == "22222222222" ||
+          cpf == "33333333333" ||
+          cpf == "44444444444" ||
+          cpf == "55555555555" ||
+          cpf == "66666666666" ||
+          cpf == "77777777777" ||
+          cpf == "88888888888" ||
+          cpf == "99999999999"){
+          Swal.fire({icon: 'error', title: 'ERRO...', text: 'CPF invalido!'});
+          return;
+      }
+         
+      for (i=1; i<=9; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
+      Resto = (Soma * 10) % 11;
+    
+        if ((Resto == 10) || (Resto == 11))  Resto = 0;
+        if (Resto != parseInt(cpf.substring(9, 10)) ) Swal.fire({icon: 'error', title: 'ERRO...', text: 'CPF invalido!'});
+    
+      Soma = 0;
+        for (i = 1; i <= 10; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+        Resto = (Soma * 10) % 11;
+    
+        if ((Resto == 10) || (Resto == 11))  Resto = 0;
+        if (Resto != parseInt(cpf.substring(10, 11) ) ) Swal.fire({icon: 'error', title: 'ERRO...', text: 'CPF invalido!'});
+        return true;
+
+
+    });

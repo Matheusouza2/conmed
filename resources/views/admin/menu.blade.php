@@ -12,13 +12,13 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="/admin">
+              <a class="nav-link" href="{{ route('telaInicial') }}" id="admin">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/admin/paciente" id="patient">
+              <a class="nav-link" href="{{ route('listPatient') }}" id="patient">
                 <i class="ni ni-single-02 text-orange"></i>
                 <span class="nav-link-text">Paciente</span>
               </a>

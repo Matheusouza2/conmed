@@ -24,4 +24,10 @@ class Patient extends Model
         'numeroconvenio',
         'observacoes'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y',
+        'updated_at' => 'datetime:d/m/Y',
+        'datanascimento' => 'datetime:d/m/Y'
+    ];
 }

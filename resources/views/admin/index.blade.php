@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Page plugins --> 
   <!-- Argon CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{ mix('site/css/style.css') }}">
 </head>
@@ -270,8 +271,57 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="/admin/cadastroPatient" class="btn btn-sm btn-neutral">Novo Paciente</a>
-              <a href="#" class="btn btn-sm btn-neutral">Agendar Consulta</a>
+              <a href="{{ route('formPatient') }}" class="btn btn-sm btn-neutral">Novo Paciente</a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#agendarconsulta">Agendar Consulta</a>
+            </div>
+          </div>
+          <!-- Modal de agendamento de consulta -->
+          <div class="modal fade" id="agendarconsulta" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+              <div class="modal-content">
+        	      <div class="modal-body p-0">
+                  <div class="card bg-secondary border-0 mb-0">
+                    <div class="card-header bg-transparent pb-5">
+                      <div class="text-muted text-center mt-2 mb-3"><small>Marcação de Consulta</small></div>
+                      <div class="card-body px-lg-5 py-lg-5">
+                        <form role="form">
+                          @csrf
+                          <div class="form-group mb-3">
+                            <div class="input-group input-group-merge input-group-alternative">
+                              <select class="form-control" name="convenio" id="select2" required>
+                                <option value="">Selecione um Convenio</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="unimed">UNIMED</option>
+                                <option value="amil">AMIL</option>
+                                <option value="geap">GEAP</option>
+                                <option value="bradesco">Bradesco Saúde</option>
+                                <option value="bradesco">SUS</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group input-group-merge input-group-alternative">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                              </div>
+                              <input class="form-control" placeholder="Password" type="password">
+                            </div>
+                          </div>
+                          <div class="custom-control custom-control-alternative custom-checkbox">
+                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                            <label class="custom-control-label" for=" customCheckLogin">
+                              <span class="text-muted">Remember me</span>
+                            </label>
+                          </div>
+                          <div class="text-center">
+                            <button type="button" class="btn btn-primary my-4">Sign in</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- Card stats -->
@@ -377,9 +427,6 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="mb-0">Pacientes na fila</h3>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Nova consulta</a>
                 </div>
               </div>
             </div>
@@ -559,6 +606,13 @@
   </div>
   <!-- Argon JS -->
   <script src="{{ mix('site/js/script.js') }}"></script>
+  <script src="{{ asset('site/js/menu.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#select2').select2();
+    });
+  </script>
 </body>
 
 </html>

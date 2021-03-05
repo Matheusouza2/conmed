@@ -15,19 +15,19 @@ class Paciente extends Migration
         Schema::create('patient', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('nomesocial')->default('');
+            $table->string('nomesocial')->nullable();
             $table->bigInteger('cpf');
             $table->date('datanascimento');
             $table->bigInteger('cep');
             $table->string('logradouro');
-            $table->integer('numero');
+            $table->integer('numero')->nullable();
             $table->string('bairro');
             $table->string('cidade');
             $table->string('uf');
-            $table->bigInteger('telefone')->default(0);
+            $table->bigInteger('telefone')->nullable();
             $table->string('convenio');
-            $table->bigInteger('numeroconvenio')->default(0);
-            $table->text('observacoes');
+            $table->bigInteger('numeroconvenio')->nullable();
+            $table->text('observacoes')->nullable();
             $table->timestamps();
         });
     }
