@@ -30,9 +30,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/profile.html">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Profile</span>
+              <a class="nav-link" href="{{ route('listDoctors') }}">
+              <i class="fas fa-user-md text-green"></i>
+                <span class="nav-link-text">Médicos</span>
               </a>
             </li>
             <li class="nav-item">

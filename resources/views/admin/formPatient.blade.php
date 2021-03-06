@@ -302,8 +302,11 @@
               <div class="tab-content" id="myTabContent">
                 <!-- Div cadastral do paciente -->
                 <div class="tab-pane fade show active" id="cadastro" role="tabpanel" aria-labelledby="cadastro">
-                  <form action="{{ route('savePatient') }}" method="post" class="needs-validation" novalidate>
+                  <form action="{{ route('storePatient') }}" method="post" id="form" class="needs-validation" novalidate>
                     @csrf
+                    @if(session('edit'))
+                      @method('PUT')
+                    @endif
                     <h6 class="heading-small text-muted mb-4">Informações pessoais</h6>
                     <div class="pl-lg-4">
                       <div class="row">
@@ -422,9 +425,9 @@
                         <div class="col-lg-4">
                           <div class="form-group">
                             <label class="form-control-label" for="convenio">Convênio *</label>
-                            <select class="form-control" name="convenio" required>
-                              <option value="">Selecione um Convenio</option>
-                              <option value="dinheiro">Dinheiro</option>
+                            <select class="form-control" name="convenio" id="convenio" required>
+                              <option>Selecione um Convenio</option>
+                              <option value="dinheiro">Particular</option>
                               <option value="unimed">UNIMED</option>
                               <option value="amil">AMIL</option>
                               <option value="geap">GEAP</option>
@@ -540,6 +543,27 @@
           );
         </script>
     @endif
+  
+@if(session('edit'))
+  <script>
+    $('#nome').val('{{ $patient->nome }}');
+    $('#nomesocial').val('{{ $patient->nomesocial }}');
+    $('#cpf').val('{{ $patient->cpf }}');
+    $('#datanascimento').val('{{ date( 'd/m/Y' , strtotime($patient->datanascimento)) }}');
+    $('#cep').val('{{ $patient->cep }}');
+    $('#logradouro').val('{{ $patient->logradouro }}');
+    $('#numero').val('{{ $patient->numero }}');
+    $('#bairro').val('{{ $patient->bairro }}');
+    $('#cidade').val('{{ $patient->cidade }}');
+    $('#uf').val('{{ $patient->uf }}');
+    $('#telefone').val('{{ $patient->telefone }}');
+    $('#convenio').val('{{ $patient->convenio }}');
+    $('#numeroconvenio').val('{{ $patient->numeroconvenio }}');
+    $('#observacoes').val('{{ $patient->observacoes }}');
+    $('#form').attr('action','{{ route('editPatient', ['patient' => $patient->id]) }}');
+    $('#cpf').attr('readonly', true);
+  </script>
+@endif
 </body>
 
 </html>

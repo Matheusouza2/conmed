@@ -21,14 +21,17 @@ Route::get('/admin', 'DashboardController@telaInicial')->name('telaInicial');
 /** 
 * ROTAS RESPONSAVEIS PELO PACIENTE
 */
-Route::get('/admin/cadastroPaciente', 'PatientController@viewFormPatient')->name('formPatient');
 Route::get('/admin/pacientes', 'PatientController@listPatient')->name('listPatient');
-Route::post('/admin/savePatient', 'PatientController@savePatient')->name('savePatient');
-Route::put('/admin/updatePatient', 'PatientController@updatePatient')->name('updatePatient');
-Route::delete('/admin/delPatient', 'PatientController@delPatient')->name('delPatient');
+Route::get('/admin/pacientesJson', 'PatientController@listPatientJson')->name('listPatientJson');
+Route::get('/admin/pacientes/novo', 'PatientController@viewFormPatient')->name('formPatient');
+Route::post('/admin/pacientes/storePatient', 'PatientController@storePatient')->name('storePatient');
+Route::get('/admin/pacientes/editar/{patient}', 'PatientController@viewEditPatient')->name('viewEditPatient');
+Route::put('/admin/pacientes/edit/{patient}', 'PatientController@editPatient')->name('editPatient');
+Route::delete('/admin/delPatient/{patient}', 'PatientController@delPatient')->name('delPatient');
 
 
 /**
- * ROTAS RESPONSAVEIS PELAS HOUSES
+ * ROTAS RESPONSAVEIS PELOS MEDICOS
  */
-Route::post('/saveHouse', 'HouseController@saveHouse')->name('saveHouse');
+Route::get('/medicos', 'DoctorController@listDoctors')->name('listDoctors');
+Route::get('/medicosJson', 'DoctorController@listDoctorsJson')->name('listDoctorsJson');

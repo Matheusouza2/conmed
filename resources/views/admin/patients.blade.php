@@ -298,6 +298,7 @@
                 <th>Data de Nascimento</th>
                 <th>CPF</th>
                 <th>Telefone</th>
+                <th>Situação</th>
                 <th style="width: 1em;">Ações</th>
             </tr>
         </thead>
@@ -309,14 +310,19 @@
                 <td>{{ date( 'd/m/Y' , strtotime($patient->datanascimento)) }}</td>
                 <td>{{ $patient->cpf }}</td>
                 <td>{{ $patient->telefone }}</td>
+                <td>{{ $patient->status }}</td>
                 <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Ver / Editar</a>
-                          <a class="dropdown-item" href="#">Desativa Paciente</a>
+                          <a class="dropdown-item" href="{{ route('viewEditPatient', $patient->id) }}">Ver / Editar</a>
+                          <form action="{{ route('delPatient', ['patient' => $patient->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="dropdown-item" type="submit">Desativa Paciente</button>
+                          </form>
                         </div>
                       </div>
                 </td>

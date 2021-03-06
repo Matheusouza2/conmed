@@ -22,7 +22,8 @@ class Patient extends Model
         'telefone',
         'convenio',
         'numeroconvenio',
-        'observacoes'
+        'observacoes',
+        'status'
     ];
 
     protected $casts = [

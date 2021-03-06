@@ -9,7 +9,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
@@ -18,23 +18,24 @@
   <meta name="author" content="Creative Tim">
   <title>Conmed</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ asset('site/images/brand/favicon.png') }}" type="image/png"> 
+  <link rel="icon" href="{{ asset('site/images/brand/favicon.png') }}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- Page plugins --> 
   <!-- Argon CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{ mix('site/css/style.css') }}">
 </head>
 
 <body>
   <!-- Sidenav -->
+  <!-- Sidenav -->
   @include('admin.menu')
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
@@ -256,311 +257,215 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Default</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="{{ route('formPatient') }}" class="btn btn-sm btn-neutral">Novo Paciente</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#agendarconsulta">Agendar Consulta</a>
-            </div>
-          </div>
-          <!-- Modal de agendamento de consulta -->
-          <div class="modal fade" id="agendarconsulta" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-              <div class="modal-content">
-        	      <div class="modal-body p-0">
-                  <div class="card bg-secondary border-0 mb-0">
-                    <div class="card-header bg-transparent pb-5">
-                      <div class="text-muted text-center mt-2 mb-3">Marcação de Consulta</div>
-                      <div class="card-body px-lg-3 py-lg-3">
-                        <form role="form" >
-                          @csrf
-                          <div class="form-group mb-3">
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="convenio" id="convenio" required>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="medico" id="medico" required>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                            <label class="custom-control-label" for=" customCheckLogin">
-                              <span class="text-muted">Remember me</span>
-                            </label>
-                          </div>
-                          <div class="text-center">
-                            <button type="button" class="btn btn-success my-4">Confirmar Agendamento</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes agendados para hoje</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-calendar-grid-58"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes atendidos</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-check-bold"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes em espera</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="fas fa-couch"></i>  
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes faltosos</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Olá Operador</h1>
+            <p class="text-white mt-0 mb-5">Aqui você vai fazer o cadastro dos pacientes, não esqueça de preencher todos os campos importantes (*)</p>
           </div>
         </div>
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt--8">
       <div class="row">
-        <div class="col-xl-8">
-          <div class="card">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Pacientes na fila</h3>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Senha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Contato</th>
-                    <th scope="col">Atendimento</th>
-                    <th scope="col">Médico/Sala</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      /argon/
-                    </th>
-                    <td>
-                      4,569
-                    </td>
-                    <td>
-                      340
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/index.html
-                    </th>
-                    <td>
-                      3,985
-                    </td>
-                    <td>
-                      319
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/charts.html
-                    </th>
-                    <td>
-                      3,513
-                    </td>
-                    <td>
-                      294
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/tables.html
-                    </th>
-                    <td>
-                      2,050
-                    </td>
-                    <td>
-                      147
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/profile.html
-                    </th>
-                    <td>
-                      1,795
-                    </td>
-                    <td>
-                      190
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="col-xl-12 order-xl-1">
+          <div class="nav-wrapper">
+              <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#cadastro" role="tab" aria-controls="cadastro" aria-selected="true"><i class="ni ni-folder-17 mr-2"></i>Cadastro</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#historicomedico" role="tab" aria-controls="historicomedico" aria-selected="false"><i class="ni ni-archive-2 mr-2"></i>Histórico de Consultas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#financeiro" role="tab" aria-controls="financeiro" aria-selected="false"><i class="ni ni-money-coins mr-2"></i>Financeiro</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#receituario" role="tab" aria-controls="receituario" aria-selected="false"><i class="ni ni-align-left-2 mr-2"></i>Receituário</a>
+                  </li>
+              </ul>
           </div>
-        </div>
-        <div class="col-xl-4">
           <div class="card">
-            <div class="card-header border-0">
+            <div class="card-header">
               <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Senhas</h3>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-warning" title="Devolver a senha atual para a fila de espera e chamar a próxima">Devolver senha</a>
+                <div class="col-8">
+                  <h2 class="mb-0">Cadastro de paciente</h2>
                 </div>
               </div>
             </div>
-            <div class="row align-items-center">
-              <div class="col text-center">
-                <h1 style="font-size: 40px;">CA32</h1>
-              </div>
-              <div class="col-8">
-                <div class="table-responsive">
-                  <!-- Projects table -->
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Paciente</th>
-                        <th scope="col">Senha</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">José Antonio</th>
-                        <td>PC3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maria Alencar</th>
-                        <td>CA31</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">João Pedro</th>
-                        <td>CA30</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Joaquina Antonieta</th>
-                        <td>PC2</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Miguel Oliveira</th>
-                        <td>CA29</td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <div class="card-body">
+              <div class="tab-content" id="myTabContent">
+                <!-- Div cadastral do paciente -->
+                <div class="tab-pane fade show active" id="cadastro" role="tabpanel" aria-labelledby="cadastro">
+                  <form action="{{ route('savePatient') }}" method="post" class="needs-validation" novalidate>
+                    @csrf
+                    <h6 class="heading-small text-muted mb-4">Informações pessoais</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="nome">Nome *</label>
+                            <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome completo" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="nomesocial">Nome Social</label>
+                            <input type="text" id="nomesocial" name="nomesocial" class="form-control" placeholder="Como o(a) paciente prefere ser chamado(a)">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="datanascimento">Data de Nascimento *</label>
+                            <input type="text" id="datanascimento" name="datanascimento" class="form-control" placeholder="Data de Nascimento" autocomplete="off" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="idade">Idade</label>
+                            <input type="text" id="idade" name="idade" class="form-control" readonly="true">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="my-4" />
+                    <!-- Address -->
+                    <h6 class="heading-small text-muted mb-4">Informações de contato</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="cep">Cep *</label>
+                            <input type="text" id="cep" name="cep" class="form-control" placeholder="Digite o cep e aguarde até o sistema preencher o endereço" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-group">
+                            <label class="form-control-label" for="logradouro">Logradouro *</label>
+                            <input id="logradouro" name="logradouro" class="form-control" placeholder="Rua Av. Tv." type="text" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label class="form-control-label" for="numero">Número</label>
+                            <input id="numero" name="numero" class="form-control" placeholder="Numero da casa" type="number">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="bairro">Bairro *</label>
+                            <input type="text" id="bairro" name="bairro" class="form-control" placeholder="Bairro" required>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="cidade">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Cidade">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="uf">UF</label>
+                            <input type="text" id="uf" name="uf" class="form-control" placeholder="UF">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="telefone">Telefone</label>
+                            <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Número de contato">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="my-4" />
+                    <!-- Description -->
+                    <h6 class="heading-small text-muted mb-4">Informações Extras</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="convenio">Convênio *</label>
+                            <select class="form-control" name="convenio" required>
+                              <option value="">Selecione um Convenio</option>
+                              <option value="dinheiro">Dinheiro</option>
+                              <option value="unimed">UNIMED</option>
+                              <option value="amil">AMIL</option>
+                              <option value="geap">GEAP</option>
+                              <option value="bradesco">Bradesco Saúde</option>
+                              <option value="bradesco">SUS</option>
+                            </select>
+                            <div class="invalid-feedback">
+                              Campo de preenchimento obrigatório
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="numeroconvenio">Número do Convênio</label>
+                            <input type="text" id="numeroconvenio" name="numeroconvenio" placeholder="Digite o numero do convênio" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label">Observações</label>
+                          <textarea rows="4" class="form-control" placeholder="Digite aqui qualquer informação sobre o paciente que você julgue nescessária"></textarea>
+                        </div>
+                      </div>  
+                    </div>
+                    <div class="text-right">
+                      <button type="submit" class="btn btn-success my-4">Salvar cadastro</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- Div de historico médico do paciente -->
+                <div class="tab-pane fade show" id="historicomedico" role="tabpanel" aria-labelledby="historicomedico">
+                  <h1>Historico Medico </h1>
+                </div>
+                <!-- Div de historico financeiro do paciente -->
+                <div class="tab-pane fade show" id="financeiro" role="tabpanel" aria-labelledby="financeiro">
+                  <h1>Historico Financeiro </h1>
+                </div>
+                <!-- Div de historico financeiro do paciente -->
+                <div class="tab-pane fade show" id="receituario" role="tabpanel" aria-labelledby="receituario">
+                  <h1>Historico Financeiro </h1>
                 </div>
               </div>
             </div>
@@ -595,32 +500,46 @@
       </footer>
     </div>
   </div>
-  <!-- Argon JS -->
+  <!-- Argon Scripts -->
   <script src="{{ mix('site/js/script.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="{{ asset('site/js/formPatientValidation.js') }}"></script>
+  <script src="{{ asset('site/js/buscarcep.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="{{ asset('site/js/menu.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
-      $('#convenio').select2({
-        placeholder: 'Procure pelo paciente',
-        ajax:{
-          url: "{{ route('listPatientJson') }}",
-          dataType: "json",
-          delay: 250,
-            processResults: function (data) {
-                return {
-                results:  $.map(data, function (item) {
-                        return {
-                            text: item.nome,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
         }
-      });
-      $('#medico').select2({});
-  </script>
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+  </script>  
+
+@if(session('mensage'))
+        <script>
+          Swal.fire(
+            'Erro !',
+            '{{session('mensage')}}',
+            'error'
+          );
+        </script>
+    @endif
 </body>
 
 </html>

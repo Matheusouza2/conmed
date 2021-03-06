@@ -9,7 +9,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
@@ -18,23 +18,24 @@
   <meta name="author" content="Creative Tim">
   <title>Conmed</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ asset('site/images/brand/favicon.png') }}" type="image/png"> 
+  <link rel="icon" href="{{ asset('site/images/brand/favicon.png') }}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
   <!-- Page plugins --> 
   <!-- Argon CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{ mix('site/css/style.css') }}">
 </head>
 
 <body>
   <!-- Sidenav -->
+  <!-- Sidenav -->
   @include('admin.menu')
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
@@ -256,154 +257,23 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
+    <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Default</li>
+                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
                 </ol>
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="{{ route('formPatient') }}" class="btn btn-sm btn-neutral">Novo Paciente</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#agendarconsulta">Agendar Consulta</a>
-            </div>
-          </div>
-          <!-- Modal de agendamento de consulta -->
-          <div class="modal fade" id="agendarconsulta" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-              <div class="modal-content">
-        	      <div class="modal-body p-0">
-                  <div class="card bg-secondary border-0 mb-0">
-                    <div class="card-header bg-transparent pb-5">
-                      <div class="text-muted text-center mt-2 mb-3">Marcação de Consulta</div>
-                      <div class="card-body px-lg-3 py-lg-3">
-                        <form role="form" >
-                          @csrf
-                          <div class="form-group mb-3">
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="convenio" id="convenio" required>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="medico" id="medico" required>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                            <label class="custom-control-label" for=" customCheckLogin">
-                              <span class="text-muted">Remember me</span>
-                            </label>
-                          </div>
-                          <div class="text-center">
-                            <button type="button" class="btn btn-success my-4">Confirmar Agendamento</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes agendados para hoje</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-calendar-grid-58"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes atendidos</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-check-bold"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes em espera</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="fas fa-couch"></i>  
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes faltosos</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
+              <a href="{{ route('formDoctor') }}" class="btn btn-sm btn-neutral">Novo Médico</a>
             </div>
           </div>
         </div>
@@ -412,161 +282,63 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col-xl-8">
+        <div class="col">
           <div class="card">
+            <!-- Card header -->
             <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Pacientes na fila</h3>
-                </div>
-              </div>
+              <h3 class="mb-0">Light table</h3>
             </div>
+            <!-- Light table -->
             <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Senha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Contato</th>
-                    <th scope="col">Atendimento</th>
-                    <th scope="col">Médico/Sala</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      /argon/
-                    </th>
-                    <td>
-                      4,569
-                    </td>
-                    <td>
-                      340
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/index.html
-                    </th>
-                    <td>
-                      3,985
-                    </td>
-                    <td>
-                      319
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/charts.html
-                    </th>
-                    <td>
-                      3,513
-                    </td>
-                    <td>
-                      294
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/tables.html
-                    </th>
-                    <td>
-                      2,050
-                    </td>
-                    <td>
-                      147
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/profile.html
-                    </th>
-                    <td>
-                      1,795
-                    </td>
-                    <td>
-                      190
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4">
-          <div class="card">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Senhas</h3>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
-                </div>
-                <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-warning" title="Devolver a senha atual para a fila de espera e chamar a próxima">Devolver senha</a>
-                </div>
-              </div>
-            </div>
-            <div class="row align-items-center">
-              <div class="col text-center">
-                <h1 style="font-size: 40px;">CA32</h1>
-              </div>
-              <div class="col-8">
-                <div class="table-responsive">
-                  <!-- Projects table -->
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Paciente</th>
-                        <th scope="col">Senha</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">José Antonio</th>
-                        <td>PC3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maria Alencar</th>
-                        <td>CA31</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">João Pedro</th>
-                        <td>CA30</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Joaquina Antonieta</th>
-                        <td>PC2</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Miguel Oliveira</th>
-                        <td>CA29</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <table id="myTable" class="table align-items-center table-flush" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Convênio</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th style="width: 1em;">Ações</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            @foreach($doctors as $doctor)
+            <tr>
+                <td>{{$doctor->nome}}</td>
+                <td>{{ $doctor->convenio }}</td>
+                <td>{{ date( 'd/m/Y' , strtotime($doctor->datanascimento)) }}</td>
+                <td>{{ $doctor->cpf }}</td>
+                <td>{{ $doctor->telefone }}</td>
+                <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Ver / Editar</a>
+                          <a class="dropdown-item" href="#">Desativa Paciente</a>
+                        </div>
+                      </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Nome</th>
+                <th>Convênio</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th style="width: 1em;">Ações</th>
+            </tr>
+        </tfoot>
+    </table>
             </div>
           </div>
         </div>
       </div>
+      
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -595,32 +367,31 @@
       </footer>
     </div>
   </div>
-  <!-- Argon JS -->
+  <!-- Argon Scripts -->
   <script src="{{ mix('site/js/script.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
   <script src="{{ asset('site/js/menu.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
-      $('#convenio').select2({
-        placeholder: 'Procure pelo paciente',
-        ajax:{
-          url: "{{ route('listPatientJson') }}",
-          dataType: "json",
-          delay: 250,
-            processResults: function (data) {
-                return {
-                results:  $.map(data, function (item) {
-                        return {
-                            text: item.nome,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-      });
-      $('#medico').select2({});
+    $(document).ready( function () {
+    $('#myTable').DataTable( {
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+      }
+    } );
+      } );
   </script>
+    @if(session('mensage'))
+        <script>
+          Swal.fire(
+            'Sucesso!',
+            '{{session('mensage')}}',
+            'success'
+          );
+        </script>
+    @endif
+  
 </body>
-
 </html>
