@@ -60,9 +60,23 @@ class PatientController extends Controller
         $data = [];
         if($request->has('q')){
             $search = $request->q;
-            $data = Patient::select("id","nome")
-                    ->where('nome','ILIKE',"%$search%")
+            $data = Patient::select("id","nome","cpf", "convenio", "logradouro", "numero", "cidade", "uf")
+                    ->where('cpf','ILIKE',"%$search%")
+                    ->orWhere('nome', 'ILIKE', "%$search%")
                     ->get();
+        }
+        
+        foreach($data as $patient){
+            $cpfv = null;
+            $cpf = $patient->cpf;
+            if(strlen($cpf) == 10){
+                $cpfv = '0'.$cpf;
+            }elseif(strlen($cpf) == 9){
+                $cpfv = '00'.$cpf;
+            }else{
+                $cpfv = $cpf;
+            }
+            $patient->cpf = $cpfv;
         }
         return response()->json($data);
     }
@@ -124,7 +138,7 @@ class PatientController extends Controller
         return redirect()->route('listPatient')->with('mensage', 'Paciente desativado com sucesso!');
     }
 
-    public function mascara($mask, $str){
+    public static function mascara($mask, $str){
         $str = str_replace(" ","",$str);
         for($i=0;$i<strlen($str);$i++){
             $mask[strpos($mask,"#")] = $str[$i];

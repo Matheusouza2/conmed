@@ -23,6 +23,8 @@ mix.styles([
     'resources/views/admin/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js',
     'resources/views/admin/vendor/chart.js/dist/Chart.min.js',
     'resources/views/admin/vendor/chart.js/dist/Chart.extension.js',
-    'resources/views/admin/js/argon.js'
+    'resources/views/admin/js/argon.js',
+    'node_modules/select2/dist/js/select2.min.js',
+    'node_modules/select2/dist/js/i18n/pt-BR.js'
 ], 'public/site/js/script.js')
 .version();

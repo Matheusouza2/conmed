@@ -30,8 +30,8 @@ $(document).ready(function () {
                         $("#bairro").val(dados.bairro);
                         $("#cidade").val(dados.localidade);
                         $("#uf").val(dados.uf);
-                        document.getElementById("EstadoInput").disabled = true;
-                        document.getElementById("cidadeInput").disabled = true;
+                        document.getElementById("cidade").disabled = true;
+                        document.getElementById("uf").disabled = true;
                     } //end if.
                     else {
                         Swal.fire('Erro ao identificar o CEP', 'CEP não encontrado, coloque um CEP valido e tente novamente', 'error')

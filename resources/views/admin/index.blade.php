@@ -24,8 +24,40 @@
   <!-- Page plugins --> 
   <!-- Argon CSS -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
   <link rel="stylesheet" href="{{ mix('site/css/style.css') }}">
+
+<style>
+.line {
+        font-size: 13px;
+        margin: 0 auto;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+.typing-animation {
+        animation: blinkCursor 500ms steps(40) infinite normal,
+          typing 4s steps(40) 1s normal both;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 32em;
+        }
+      }
+
+      @keyframes blinkCursor {
+        from {
+          border-right-color: rgba(255, 255, 255, 0.75);
+        }
+        to {
+          border-right-color: transparent;
+        }
+      }
+</style>
+
 </head>
 
 <body>
@@ -287,12 +319,18 @@
                         <form role="form" >
                           @csrf
                           <div class="form-group mb-3">
+                            <label class="form-control-label" for="paciente">Paciente</label>
                             <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="convenio" id="convenio" required>
-                              </select>
-                            </div>
+                              <select class="" name="paciente" id="paciente" required></select>
+                            </div>                         
                           </div>
-                          <div class="form-group">
+                          
+                          <div class="form-group mb-3 ml-0">
+                            <label id="dados"></label>
+                          </div>
+
+                          <div class="form-group mb-3">
+                            <label class="form-control-label" for="medico">Médico</label>
                             <div class="input-group input-group-merge input-group-alternative">
                               <select class="form-control" name="medico" id="medico" required>
                               </select>
@@ -417,7 +455,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Pacientes na fila</h3>
+                  <h3 class="mb-0">Sala de espera</h3>
                 </div>
               </div>
             </div>
@@ -435,74 +473,18 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">
-                      /argon/
-                    </th>
-                    <td>
-                      4,569
-                    </td>
-                    <td>
-                      340
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                    </td>
+                    <th scope="row">/argon/</th>
+                    <td>4,569</td>
+                    <td>340</td>
+                    <td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
+                    <td>319</td>
                   </tr>
                   <tr>
-                    <th scope="row">
-                      /argon/index.html
-                    </th>
-                    <td>
-                      3,985
-                    </td>
-                    <td>
-                      319
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/charts.html
-                    </th>
-                    <td>
-                      3,513
-                    </td>
-                    <td>
-                      294
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/tables.html
-                    </th>
-                    <td>
-                      2,050
-                    </td>
-                    <td>
-                      147
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /argon/profile.html
-                    </th>
-                    <td>
-                      1,795
-                    </td>
-                    <td>
-                      190
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                    </td>
+                    <th scope="row">/argon/index.html</th>
+                    <td>3,985</td>
+                    <td>319</td>
+                    <td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
+                    <td>319</td>
                   </tr>
                 </tbody>
               </table>
@@ -520,7 +502,7 @@
                   <a href="#!" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-warning" title="Devolver a senha atual para a fila de espera e chamar a próxima">Devolver senha</a>
+                  <a href="#!" class="btn btn-sm btn-warning" title="Devolver a senha atual para a sala de espera e chamar a próxima">Devolver senha</a>
                 </div>
               </div>
             </div>
@@ -567,6 +549,47 @@
           </div>
         </div>
       </div>
+      <div class="row">
+      <!-- Table de pacientes em atendimento -->
+      <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Pacientes em Atendimento / Atendidos</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Senha</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Médico/Sala</th>
+                    <th scope="col">Situação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">/argon/</th>
+                    <td>4,569</td>
+                    <td>340</td>
+                    <td><i class="fas fa-door-open text-success mr-3"></i> Liberado</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">/argon/index.html</th>
+                    <td>3,985</td>
+                    <td>319</td>
+                    <td><i class="fas fa-door-closed text-danger mr-3"></i> Em Consulta</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -598,28 +621,53 @@
   <!-- Argon JS -->
   <script src="{{ mix('site/js/script.js') }}"></script>
   <script src="{{ asset('site/js/menu.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
-      $('#convenio').select2({
-        placeholder: 'Procure pelo paciente',
-        ajax:{
+    var dados;
+    $('#paciente').select2({
+      language: "pt-BR",
+      placeholder: 'Digite o CPF ou o Nome',
+      ajax:{
           url: "{{ route('listPatientJson') }}",
           dataType: "json",
-          delay: 250,
-            processResults: function (data) {
+          processResults: function (data) {
+            return {
+              results:  $.map(data, function (item) {
+                dados = item;
                 return {
-                results:  $.map(data, function (item) {
-                        return {
-                            text: item.nome,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
+                  text: item.cpf+'|'+item.nome,
+                  id: item.id
+                }
+              })
+            };
+          },
+            cache: true,
+        }
+      }).on('select2:close', event => escrever(event));
+
+      function escrever(e){
+        $('#dados').delay(2000).html('Nome: '+dados.nome+'<br>'+'CPF: '+dados.cpf+'<br>'+'Convênio: '+dados.convenio+'<br>'+'Endereço: '+dados.logradouro+', '+dados.numero+'<br>'+'Local: '+dados.cidade+', '+dados.uf).addClass('line typing-animation');
+
+      }
+            
+      $('#medico').select2({
+        language: "pt-BR",
+        placeholder: 'Digite o Nome do Médico',
+        ajax:{
+          url: "{{ route('listDoctorsJson') }}",
+          dataType: "json",
+          processResults: function (data) {
+            return {
+              results:  $.map(data, function (item) {
+                return {
+                  text: item.nome,
+                  id: item.id
+                }
+              })
+            };
+          },
+          cache: true,
         }
       });
-      $('#medico').select2({});
   </script>
 </body>
 

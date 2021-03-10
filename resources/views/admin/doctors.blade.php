@@ -294,9 +294,9 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Convênio</th>
-                <th>Data de Nascimento</th>
                 <th>CPF</th>
+                <th>CRM</th>
+                <th>Situação</th>
                 <th>Telefone</th>
                 <th style="width: 1em;">Ações</th>
             </tr>
@@ -304,10 +304,10 @@
         <tbody class="list">
             @foreach($doctors as $doctor)
             <tr>
-                <td>{{$doctor->nome}}</td>
-                <td>{{ $doctor->convenio }}</td>
-                <td>{{ date( 'd/m/Y' , strtotime($doctor->datanascimento)) }}</td>
+                <td>{{ $doctor->nome }}</td>
                 <td>{{ $doctor->cpf }}</td>
+                <td>{{ $doctor->crm }}</td>
+                <td>{{ $doctor->situacao }}</td>
                 <td>{{ $doctor->telefone }}</td>
                 <td class="text-right">
                       <div class="dropdown">
@@ -326,9 +326,9 @@
         <tfoot>
             <tr>
                 <th>Nome</th>
-                <th>Convênio</th>
-                <th>Data de Nascimento</th>
                 <th>CPF</th>
+                <th>CRM</th>
+                <th>Situação</th>
                 <th>Telefone</th>
                 <th style="width: 1em;">Ações</th>
             </tr>

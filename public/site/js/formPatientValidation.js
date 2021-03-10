@@ -13,6 +13,22 @@ $('#cep').mask('00000-000');
       prevText: 'Anterior'
     });
 
+    $('#datanascimento').blur(function (){
+      var datanascimento = $(this).val();
+      var data = datanascimento.split('/');
+      var today = new Date();
+      
+      var idade = today.getFullYear() - data[2];
+      
+      if(today.getMonth()+1 < data[1]){
+        idade--;
+      }
+
+      $('#idade').val(idade+" anos");
+      
+    });
+
+
     $('#cpf').blur(function () {
       cpf = $(this).val().replace(/\D/g, '');
       var Soma;

@@ -290,28 +290,28 @@
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-            <table id="myTable" class="table align-items-center table-flush" style="width:100%">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Convênio</th>
-                <th>Data de Nascimento</th>
-                <th>CPF</th>
-                <th>Telefone</th>
-                <th>Situação</th>
-                <th style="width: 1em;">Ações</th>
-            </tr>
-        </thead>
-        <tbody class="list">
-            @foreach($patients as $patient)
-            <tr>
-                <td>{{$patient->nome}}</td>
-                <td>{{ $patient->convenio }}</td>
-                <td>{{ date( 'd/m/Y' , strtotime($patient->datanascimento)) }}</td>
-                <td>{{ $patient->cpf }}</td>
-                <td>{{ $patient->telefone }}</td>
-                <td>{{ $patient->status }}</td>
-                <td class="text-right">
+              <table id="myTable" class="table align-items-center table-flush" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Convênio</th>
+                    <th>Data de Nascimento</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Situação</th>
+                    <th style="width: 1em;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                  @foreach($patients as $patient)
+                    <tr>
+                      <td>{{$patient->nome}}</td>
+                      <td>{{ $patient->convenio }}</td>
+                      <td>{{ date( 'd/m/Y' , strtotime($patient->datanascimento)) }}</td>
+                      <td>{{ $patient->cpf }}</td>
+                      <td>{{ $patient->telefone }}</td>
+                      <td>{{ $patient->status }}</td>
+                      <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
@@ -325,25 +325,27 @@
                           </form>
                         </div>
                       </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Nome</th>
-                <th>Convênio</th>
-                <th>Data de Nascimento</th>
-                <th>CPF</th>
-                <th>Telefone</th>
-                <th style="width: 1em;">Ações</th>
-            </tr>
-        </tfoot>
-    </table>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Convênio</th>
+                    <th>Data de Nascimento</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Situação</th>
+                    <th style="width: 1em;">Ações</th>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </div>
         </div>
       </div>
+    </div>
       
       <!-- Footer -->
       <footer class="footer pt-0">

@@ -33,5 +33,10 @@ Route::delete('/admin/delPatient/{patient}', 'PatientController@delPatient')->na
 /**
  * ROTAS RESPONSAVEIS PELOS MEDICOS
  */
-Route::get('/medicos', 'DoctorController@listDoctors')->name('listDoctors');
-Route::get('/medicosJson', 'DoctorController@listDoctorsJson')->name('listDoctorsJson');
+Route::get('/admin/medicos', 'DoctorController@listDoctors')->name('listDoctors');
+Route::get('/admin/medicosJson', 'DoctorController@listDoctorsJson')->name('listDoctorsJson');
+Route::get('/admin/medicos/novo', 'DoctorController@viewFormDoctor')->name('formDoctor');
+Route::get('/admin/medicos/editar/{doctor}', 'DoctorController@viewEditDoctor')->name('viewEditDoctor');
+Route::post('/admin/medicos/storeDoctor', 'DoctorController@storeDoctor')->name('storeDoctor');
+Route::put('/admin/medicos/edit/{doctor}', 'DoctorController@editDoctor')->name('editDoctor');
+Route::delete('/admin/medicos/delDoctor/{doctor}', 'DoctorController@editDoctor')->name('delDoctor');

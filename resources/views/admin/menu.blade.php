@@ -37,8 +37,8 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="examples/tables.html">
-                <i class="ni ni-bullet-list-67 text-default"></i>
-                <span class="nav-link-text">Tables</span>
+                <i class="fas fa-calendar-alt text-info"></i>
+                <span class="nav-link-text">Calendário</span>
               </a>
             </li>
             <li class="nav-item">
