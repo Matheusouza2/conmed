@@ -315,7 +315,7 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Ver / Editar</a>
+                          <a class="dropdown-item" href="{{ route('viewEditDoctor', $doctor->id) }}">Ver / Editar</a>
                           <a class="dropdown-item" href="#">Desativa Paciente</a>
                         </div>
                       </div>

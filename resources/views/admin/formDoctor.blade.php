@@ -296,7 +296,10 @@
               <div class="tab-content" id="myTabContent">
                 <!-- Div cadastral do paciente -->
                 <div class="tab-pane fade show active" id="cadastro" role="tabpanel" aria-labelledby="cadastro">
-                  <form action="{{ route('storeDoctor') }}" method="post" class="needs-validation" novalidate>
+                  <form action="{{ route('storeDoctor') }}" id="form" method="post" class="needs-validation" novalidate>
+                    @if(session('edit'))
+                      @method('PUT')
+                    @endif
                     @csrf
                     <h6 class="heading-small text-muted mb-4">Informações pessoais</h6>
                     <div class="pl-lg-4">
@@ -458,6 +461,19 @@
           );
         </script>
     @endif
+@if(session('edit'))
+  <script>
+    $('#nome').val('{{ $doctor->nome }}');
+    $('#crm').val('{{ $doctor->crm }}');
+    $('#cpf').val('{{ $doctor->cpf }}');
+    $('#situacao').val('{{ $doctor->situacao }}');
+    $('#telefone').val('{{ $doctor->telefone }}');
+    $('#observacoes').val('{{ $doctor->observacoes }}');
+    $('#uf').val('{{ $doctor->uf }}');
+    $('#form').attr('action','{{ route('editDoctor', ['doctor' => $doctor->id]) }}');
+    $('#cpf').attr('readonly', true);
+  </script>
+@endif
 </body>
 
 </html>

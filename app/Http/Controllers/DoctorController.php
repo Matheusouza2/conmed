@@ -10,6 +10,7 @@ class DoctorController extends Controller
 {
     public function viewFormDoctor()
     {
+        session(['edit' => false]);
         return view('admin.formDoctor');
     }
 
@@ -37,7 +38,7 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::all();
         foreach($doctors as $doctor){
-            $cpfv = null;
+            $cpfv = null; 
             $cpf = $doctor->cpf;
             if(strlen($cpf) == 10){
                 $cpfv = '0'.$cpf;
@@ -63,5 +64,44 @@ class DoctorController extends Controller
                     ->get();
         }
         return response()->json($data);
+    }
+
+    public function viewEditDoctor(Doctor $doctor)
+    {
+        session(['edit' => true]);
+        $cpfv = null;
+        $cpf = $doctor->cpf;
+        if(strlen($cpf) == 10){
+            $cpfv = '0'.$cpf;
+        }elseif(strlen($cpf) == 9){
+            $cpfv = '00'.$cpf;
+        }else{
+            $cpfv = $cpf;
+        }
+        $doctor->cpf = $cpfv;
+        $doctor->cpf = PatientController::mascara('###.###.###-##', $doctor->cpf);
+        $doctor->telefone = ($doctor->telefone > 0)?PatientController::mascara('(##) # ####-####', $doctor->telefone) : '';
+        return view('admin.formDoctor', compact('doctor'));
+    }
+
+    public function editDoctor(Request $request, Doctor $doctor)
+    {
+        //Retira a formatação de texto do CPF
+        $request['cpf'] = str_replace(array('.','-'), '', $request['cpf']);
+        //Retirar a formatação de texto do telefone
+        $request['telefone'] = $request['telefone']??0;
+        $request['telefone'] = str_replace(array('(',')','-',' '),'',$request['telefone']);
+
+        $doctor->nome = $request->nome;
+        $doctor->crm = $request->crm;
+        $doctor->cpf = $request->cpf;
+        $doctor->uf = $request->uf;
+        $doctor->situacao = $request->situacao;
+        $doctor->telefone = $request->telefone;
+        $doctor->observacoes = $request->observacoes;
+        $doctor->save();
+        
+        return redirect()->route('listDoctors');
+
     }
 }
