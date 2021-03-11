@@ -40,3 +40,10 @@ Route::get('/admin/medicos/editar/{doctor}', 'DoctorController@viewEditDoctor')-
 Route::post('/admin/medicos/storeDoctor', 'DoctorController@storeDoctor')->name('storeDoctor');
 Route::put('/admin/medicos/edit/{doctor}', 'DoctorController@editDoctor')->name('editDoctor');
 Route::delete('/admin/medicos/delDoctor/{doctor}', 'DoctorController@editDoctor')->name('delDoctor');
+
+/**
+ * ROTAS DO CALENDARIO
+ */
+Route::view('/admin/calendario', 'admin.calendar')->name('viewCalendar');
+Route::get('/admin/calendario/consultaJson', 'AppointmentController@listAppointmentJson')->name('listAppointmentJson');
+Route::post('/admin/consulta/storeConsulta', 'AppointmentController@store')->name('storeAppointment');

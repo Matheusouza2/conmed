@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUfTableDoctor extends Migration
+class CreateAppointmentVacancieTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddUfTableDoctor extends Migration
      */
     public function up()
     {
-        Schema::table('doctor', function (Blueprint $table) {
-            $table->string('uf')->after('observacoes');
+        Schema::create('appointment_vacancie', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->date('data');
+            $table->integer('numvagas');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ class AddUfTableDoctor extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('appointment_vacancie');
     }
 }

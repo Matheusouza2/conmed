@@ -26,38 +26,6 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
   <link rel="stylesheet" href="{{ mix('site/css/style.css') }}">
-
-<style>
-.line {
-        font-size: 13px;
-        margin: 0 auto;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-.typing-animation {
-        animation: blinkCursor 500ms steps(40) infinite normal,
-          typing 4s steps(40) 1s normal both;
-      }
-
-      @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 32em;
-        }
-      }
-
-      @keyframes blinkCursor {
-        from {
-          border-right-color: rgba(255, 255, 255, 0.75);
-        }
-        to {
-          border-right-color: transparent;
-        }
-      }
-</style>
-
 </head>
 
 <body>
@@ -316,12 +284,12 @@
                     <div class="card-header bg-transparent pb-5">
                       <div class="text-muted text-center mt-2 mb-3">Marcação de Consulta</div>
                       <div class="card-body px-lg-3 py-lg-3">
-                        <form role="form" >
+                        <form role="form" action="{{ route('storeAppointment') }}" method="post">
                           @csrf
                           <div class="form-group mb-3">
                             <label class="form-control-label" for="paciente">Paciente</label>
                             <div class="input-group input-group-merge input-group-alternative">
-                              <select class="" name="paciente" id="paciente" required></select>
+                              <select class="" name="patient" id="paciente" required></select>
                             </div>                         
                           </div>
                           
@@ -332,18 +300,20 @@
                           <div class="form-group mb-3">
                             <label class="form-control-label" for="medico">Médico</label>
                             <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="medico" id="medico" required>
+                              <select class="form-control" name="doctor" id="medico" required>
                               </select>
                             </div>
                           </div>
-                          <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                            <label class="custom-control-label" for=" customCheckLogin">
-                              <span class="text-muted">Remember me</span>
-                            </label>
+                          <div class="form-group mb-3">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                              </div>
+                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text">
                           </div>
+                        </div>
                           <div class="text-center">
-                            <button type="button" class="btn btn-success my-4">Confirmar Agendamento</button>
+                            <button type="submit" class="btn btn-success my-4">Confirmar Agendamento</button>
                           </div>
                         </form>
                       </div>
@@ -621,6 +591,9 @@
   <!-- Argon JS -->
   <script src="{{ mix('site/js/script.js') }}"></script>
   <script src="{{ asset('site/js/menu.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="{{ asset('site/js/indexconsultas.js') }}"></script>
   <script>
     var dados;
     $('#paciente').select2({
@@ -669,6 +642,23 @@
         }
       });
   </script>
+@if(session('errorAppointment'))
+  <script>
+    Swal.fire(
+      'Erro!',
+      '{{session('errorAppointment')}}',
+      'error'
+    );
+  </script>
+@elseif(session('successAppointment'))
+  <script>
+    Swal.fire(
+      'Sucesso!',
+      '{{session('successAppointment')}}',
+      'success'
+    );
+  </script>
+@endif
 </body>
 
 </html>

@@ -28,6 +28,7 @@ class Paciente extends Migration
             $table->string('convenio');
             $table->bigInteger('numeroconvenio')->nullable();
             $table->text('observacoes')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

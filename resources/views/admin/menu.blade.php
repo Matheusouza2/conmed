@@ -30,13 +30,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('listDoctors') }}">
+              <a class="nav-link" href="{{ route('listDoctors') }}" id="doctor">
               <i class="fas fa-user-md text-green"></i>
                 <span class="nav-link-text">Médicos</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/tables.html">
+              <a class="nav-link" href="{{ route('viewCalendar') }}" id="calendarAnchor">
                 <i class="fas fa-calendar-alt text-info"></i>
                 <span class="nav-link-text">Calendário</span>
               </a>

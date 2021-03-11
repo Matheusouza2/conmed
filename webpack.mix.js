@@ -13,6 +13,8 @@ const mix = require('laravel-mix');
 mix.styles([
     'resources/views/admin/vendor/nucleo/css/nucleo.css',
     'resources/views/admin/css/argon.css',
+    'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+    'node_modules/fullcalendar/main.css'
 ], 'public/site/css/style.css')
 
 .scripts([
@@ -25,6 +27,10 @@ mix.styles([
     'resources/views/admin/vendor/chart.js/dist/Chart.extension.js',
     'resources/views/admin/js/argon.js',
     'node_modules/select2/dist/js/select2.min.js',
-    'node_modules/select2/dist/js/i18n/pt-BR.js'
+    'node_modules/select2/dist/js/i18n/pt-BR.js',
+    'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js',
+    'node_modules/fullcalendar/main.js',
+    'node_modules/fullcalendar/locales/pt-br.js'
 ], 'public/site/js/script.js')
 .version();
