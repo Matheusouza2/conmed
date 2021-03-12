@@ -45,5 +45,12 @@ Route::delete('/admin/medicos/delDoctor/{doctor}', 'DoctorController@editDoctor'
  * ROTAS DO CALENDARIO
  */
 Route::view('/admin/calendario', 'admin.calendar')->name('viewCalendar');
-Route::get('/admin/calendario/consultaJson', 'AppointmentController@listAppointmentJson')->name('listAppointmentJson');
-Route::post('/admin/consulta/storeConsulta', 'AppointmentController@store')->name('storeAppointment');
+
+/**
+ * ROTAS DA CONSULTA
+ */
+Route::get('/admin/appointment/listToday', 'AppointmentController@listAppointment')->name('listAppointment');
+Route::get('/admin/appointment/listStatus', 'AppointmentController@listAppointmentStatus')->name('listAppointmentStatus');
+Route::get('/admin/appointment/consultaJson', 'AppointmentController@listAppointmentJson')->name('listAppointmentJson');
+Route::post('/admin/appointment/storeConsulta', 'AppointmentController@store')->name('storeAppointment');
+Route::put('/admin/appointment/update', 'AppointmentController@update')->name('updateAppointment');

@@ -13,6 +13,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
@@ -284,12 +285,15 @@
                     <div class="card-header bg-transparent pb-5">
                       <div class="text-muted text-center mt-2 mb-3">Marcação de Consulta</div>
                       <div class="card-body px-lg-3 py-lg-3">
-                        <form role="form" action="{{ route('storeAppointment') }}" method="post">
+                        <form role="form" id="form" action="{{ route('storeAppointment') }}" method="post" class="needs-validation" novalidate>
                           @csrf
                           <div class="form-group mb-3">
                             <label class="form-control-label" for="paciente">Paciente</label>
                             <div class="input-group input-group-merge input-group-alternative">
-                              <select class="" name="patient" id="paciente" required></select>
+                              <select class="form-control" name="patient" id="paciente" required></select>
+                              <div class="invalid-feedback">
+                                Campo de preenchimento obrigatório
+                              </div>
                             </div>                         
                           </div>
                           
@@ -300,16 +304,22 @@
                           <div class="form-group mb-3">
                             <label class="form-control-label" for="medico">Médico</label>
                             <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="doctor" id="medico" required>
-                              </select>
+                              <select class="form-control" name="doctor" id="medico" required></select>
+                              <div class="invalid-feedback">
+                                Campo de preenchimento obrigatório
+                              </div>
                             </div>
                           </div>
                           <div class="form-group mb-3">
+                            <label class="form-control-label" for="medico">Data da Consulta</label>
                           <div class="input-group">
                               <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                               </div>
-                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text">
+                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text" required>
+                              <div class="invalid-feedback">
+                                Campo de preenchimento obrigatório
+                              </div>
                           </div>
                         </div>
                           <div class="text-center">
@@ -422,6 +432,9 @@
       <div class="row">
         <div class="col-xl-8">
           <div class="card">
+            <div class="alert alert-default" role="alert" id="alert-loading">
+              <strong>Aguarde!</strong> Estamos carregando as informações !
+            </div>
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
@@ -437,25 +450,11 @@
                     <th scope="col">Senha</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Contato</th>
-                    <th scope="col">Atendimento</th>
                     <th scope="col">Médico/Sala</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/argon/</th>
-                    <td>4,569</td>
-                    <td>340</td>
-                    <td><i class="fas fa-arrow-up text-success mr-3"></i> 46,53%</td>
-                    <td>319</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/argon/index.html</th>
-                    <td>3,985</td>
-                    <td>319</td>
-                    <td><i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%</td>
-                    <td>319</td>
-                  </tr>
+                <tbody id="waitingroom">
+
                 </tbody>
               </table>
             </div>
@@ -469,51 +468,16 @@
                   <h3 class="mb-0">Senhas</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
+                  <a href="javascript:void(0)" onClick="chamarTicket()" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-sm btn-warning" title="Devolver a senha atual para a sala de espera e chamar a próxima">Devolver senha</a>
+                  <a href="javascript:void(0)" class="btn btn-sm btn-warning" title="Devolver a senha atual para a sala de espera e chamar a próxima">Devolver senha</a>
                 </div>
               </div>
             </div>
-            <div class="row align-items-center">
-              <div class="col text-center">
-                <h1 style="font-size: 40px;">CA32</h1>
-              </div>
-              <div class="col-8">
-                <div class="table-responsive">
-                  <!-- Projects table -->
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">Paciente</th>
-                        <th scope="col">Senha</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">José Antonio</th>
-                        <td>PC3</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maria Alencar</th>
-                        <td>CA31</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">João Pedro</th>
-                        <td>CA30</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Joaquina Antonieta</th>
-                        <td>PC2</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Miguel Oliveira</th>
-                        <td>CA29</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <div class="row lg-8 align-items-center">
+              <div class="col text-center" id="ticket">
+                <br><br><h1 style="font-size: 50px;" id="">00</h1><br><br>
               </div>
             </div>
           </div>
@@ -523,6 +487,9 @@
       <!-- Table de pacientes em atendimento -->
       <div class="col-xl-12">
           <div class="card">
+          <div class="alert alert-default" role="alert" id="alert-loading-2">
+              <strong>Aguarde!</strong> Estamos carregando as informações !
+            </div>
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
@@ -541,19 +508,7 @@
                     <th scope="col">Situação</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">/argon/</th>
-                    <td>4,569</td>
-                    <td>340</td>
-                    <td><i class="fas fa-door-open text-success mr-3"></i> Liberado</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">/argon/index.html</th>
-                    <td>3,985</td>
-                    <td>319</td>
-                    <td><i class="fas fa-door-closed text-danger mr-3"></i> Em Consulta</td>
-                  </tr>
+                <tbody id="tablecare">
                 </tbody>
               </table>
             </div>
@@ -642,6 +597,30 @@
         }
       });
   </script>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+  </script>  
+
 @if(session('errorAppointment'))
   <script>
     Swal.fire(
