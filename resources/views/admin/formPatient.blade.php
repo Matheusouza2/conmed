@@ -427,12 +427,12 @@
                             <label class="form-control-label" for="convenio">Convênio *</label>
                             <select class="form-control" name="convenio" id="convenio" required>
                               <option>Selecione um Convenio</option>
-                              <option value="dinheiro">Particular</option>
-                              <option value="unimed">UNIMED</option>
-                              <option value="amil">AMIL</option>
-                              <option value="geap">GEAP</option>
-                              <option value="bradesco">Bradesco Saúde</option>
-                              <option value="bradesco">SUS</option>
+                              <option value="Particular">Particular</option>
+                              <option value="UNIMED">UNIMED</option>
+                              <option value="AMIL">AMIL</option>
+                              <option value="GEAP">GEAP</option>
+                              <option value="Bradesco">Bradesco Saúde</option>
+                              <option value="SUS">SUS</option>
                             </select>
                             <div class="invalid-feedback">
                               Campo de preenchimento obrigatório

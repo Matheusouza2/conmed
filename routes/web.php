@@ -14,7 +14,7 @@ if (App::environment('production')) {
 Route::get('/', 'LoginController@telaLogin')->name('telaLogin');
 
 /**
- * ROTA RESPONSAVEL PELO DASHBOARD
+ * ROTA RESPONSAVEL PELO DASHBOARD ADMINISTRATIVO
  */
 Route::get('/admin', 'DashboardController@telaInicial')->name('telaInicial');
 
@@ -52,5 +52,11 @@ Route::view('/admin/calendario', 'admin.calendar')->name('viewCalendar');
 Route::get('/admin/appointment/listToday', 'AppointmentController@listAppointment')->name('listAppointment');
 Route::get('/admin/appointment/listStatus', 'AppointmentController@listAppointmentStatus')->name('listAppointmentStatus');
 Route::get('/admin/appointment/consultaJson', 'AppointmentController@listAppointmentJson')->name('listAppointmentJson');
+Route::get('/admin/appointment/showEspecific', 'AppointmentController@show')->name('show');
 Route::post('/admin/appointment/storeConsulta', 'AppointmentController@store')->name('storeAppointment');
 Route::put('/admin/appointment/update', 'AppointmentController@update')->name('updateAppointment');
+
+/**
+* ROTA RESPONSAVEL PELA TELA DE ATENDIMENTO MEDICO
+*/
+Route::view('/atendimento', 'doctor.atendimento')->name('atendimentoView');

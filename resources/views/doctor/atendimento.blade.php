@@ -35,7 +35,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
@@ -257,7 +257,7 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
+    <div class="header bg-default pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
@@ -271,238 +271,87 @@
                 </ol>
               </nav>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="{{ route('formPatient') }}" class="btn btn-sm btn-neutral">Novo Paciente</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#agendarconsulta">Agendar Consulta</a>
-            </div>
-          </div>
-          <!-- Modal de agendamento de consulta -->
-          <div class="modal fade" id="agendarconsulta" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-              <div class="modal-content">
-        	      <div class="modal-body p-0">
-                  <div class="card bg-secondary border-0 mb-0">
-                    <div class="card-header bg-transparent pb-5">
-                      <div class="text-muted text-center mt-2 mb-3">Marcação de Consulta</div>
-                      <div class="card-body px-lg-3 py-lg-3">
-                        <form role="form" id="form" action="{{ route('storeAppointment') }}" method="post" class="needs-validation" novalidate>
-                          @csrf
-                          <div class="form-group mb-3">
-                            <label class="form-control-label" for="paciente">Paciente</label>
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="patient" id="paciente" required></select>
-                              <div class="invalid-feedback">
-                                Campo de preenchimento obrigatório
-                              </div>
-                            </div>                         
-                          </div>
-                          
-                          <div class="form-group mb-3 ml-0">
-                            <label id="dados"></label>
-                          </div>
-
-                          <div class="form-group mb-3">
-                            <label class="form-control-label" for="medico">Médico</label>
-                            <div class="input-group input-group-merge input-group-alternative">
-                              <select class="form-control" name="doctor" id="medico" required></select>
-                              <div class="invalid-feedback">
-                                Campo de preenchimento obrigatório
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group mb-3">
-                            <label class="form-control-label" for="medico">Data da Consulta</label>
-                          <div class="input-group">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                              </div>
-                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text" required>
-                              <div class="invalid-feedback">
-                                Campo de preenchimento obrigatório
-                              </div>
-                          </div>
-                        </div>
-                          <div class="text-center">
-                            <button type="submit" class="btn btn-success my-4">Confirmar Agendamento</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes agendados para hoje</h5>
-                      <span class="h2 font-weight-bold mb-0" id="agendados">0</span>
-                      <br><br><br>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-calendar-grid-58"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes atendidos</h5>
-                      <span class="h2 font-weight-bold mb-0" id="atendidos">0</span>
-                      <br><br><br>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-check-bold"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes em espera</h5>
-                      <span class="h2 font-weight-bold mb-0" id="espera">0</span>
-                      <br><br><br>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="fas fa-couch"></i>  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pacientes faltosos</h5>
-                      <span class="h2 font-weight-bold mb-0" id="faltosos">0</span>
-                      <br><br><br>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col-xl-8">
-          <div class="card">
-            <div class="alert alert-default" role="alert" id="alert-loading">
-              <strong>Aguarde!</strong> Estamos carregando as informações !
-            </div>
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Sala de espera</h3>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card card-stats">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h2 class="card-title text-uppercase text-muted mb-0" id="tempo">00:00:00</h2>
+                                <button class="btn btn-sm btn-success mb-6" id="btnTime" onClick="initAttendance()" title="Quando o paciente entrar na sala, clique para iniciar o atendimento." disabled="true"><i class="fas fa-play"></i> Iniciar Consulta</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Senha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Contato</th>
-                    <th scope="col">Médico/Sala</th>
-                  </tr>
-                </thead>
-                <tbody id="waitingroom">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0" id="patientName">Nome do Paciente: </h3>
+                                <span class="mb-0 text-sm font-weight-bold" id="patientAge">Idade: </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="nav-wrapper">
+                            <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">Anamnese</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">Exames</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false">Medicamentos</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <textarea class="form-control" name="anamnesis" id="anamnesis" cols="40" rows="4" placeholder="Realiza aqui a anamnese do paciente"></textarea>
+                                <div class="text-right">
+                                    <a href="javascript:void(0)" onClick="saveAnamnesis()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                </div>
 
-                </tbody>
-              </table>
+                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <textarea class="form-control" name="" id="" cols="40" rows="4" placeholder="Realiza aqui a anamnese do paciente" readonly></textarea>
+
+                            </div>
+                            <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <textarea class="form-control" name="exams" id="exams" cols="40" rows="4" placeholder="Utilize esse campo para prescrever exames"></textarea>
+                                <div class="text-right">
+                                    <a href="javascript:void(0)" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <textarea class="form-control" name="medicines" id="medicines" cols="40" rows="4" placeholder="Prescreva medicamentos se necessario"></textarea>
+                                <div class="text-right">
+                                    <a href="javascript:void(0)" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-xl-4">
-          <div class="card">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Senhas</h3>
-                </div>
-                <div class="col text-right">
-                  <a href="javascript:void(0)" onClick="chamarTicket()" class="btn btn-sm btn-primary" title="Chamar a próxima senha">Chamar Próxima</a>
-                </div>
-                <div class="col text-right">
-                  <a href="javascript:void(0)" onClick="devolverTicket()" class="btn btn-sm btn-warning" title="Devolver a senha atual para a sala de espera e chamar a próxima">Devolver senha</a>
-                </div>
-              </div>
-            </div>
-            <div class="row lg-8 align-items-center">
-              <div class="col text-center" id="ticket">
-                <br><br><h1 style="font-size: 50px;" id="">00</h1><br><br>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-      <!-- Table de pacientes em atendimento -->
-      <div class="col-xl-12">
-          <div class="card">
-          <div class="alert alert-default" role="alert" id="alert-loading-2">
-              <strong>Aguarde!</strong> Estamos carregando as informações !
-            </div>
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Pacientes em Atendimento / Atendidos</h3>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Senha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Médico/Sala</th>
-                    <th scope="col">Situação</th>
-                  </tr>
-                </thead>
-                <tbody id="tablecare">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+        
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -534,98 +383,9 @@
   <!-- Argon JS -->
   <script src="{{ mix('site/js/script.js') }}"></script>
   <script src="{{ asset('site/js/menu.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="{{ asset('site/js/indexconsultas.js') }}"></script>
-  <script>
-    var dados;
-    $('#paciente').select2({
-      language: "pt-BR",
-      placeholder: 'Digite o CPF ou o Nome',
-      ajax:{
-          url: "{{ route('listPatientJson') }}",
-          dataType: "json",
-          processResults: function (data) {
-            return {
-              results:  $.map(data, function (item) {
-                dados = item;
-                return {
-                  text: item.cpf+'|'+item.nome,
-                  id: item.id
-                }
-              })
-            };
-          },
-            cache: true,
-        }
-      }).on('select2:close', event => escrever(event));
-
-      function escrever(e){
-        $('#dados').delay(2000).html('Nome: '+dados.nome+'<br>'+'CPF: '+dados.cpf+'<br>'+'Convênio: '+dados.convenio+'<br>'+'Endereço: '+dados.logradouro+', '+dados.numero+'<br>'+'Local: '+dados.cidade+', '+dados.uf).addClass('line typing-animation');
-
-      }
-            
-      $('#medico').select2({
-        language: "pt-BR",
-        placeholder: 'Digite o Nome do Médico',
-        ajax:{
-          url: "{{ route('listDoctorsJson') }}",
-          dataType: "json",
-          processResults: function (data) {
-            return {
-              results:  $.map(data, function (item) {
-                return {
-                  text: item.nome,
-                  id: item.id
-                }
-              })
-            };
-          },
-          cache: true,
-        }
-      });
-  </script>
-
-<script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-  </script>  
-
-@if(session('errorAppointment'))
-  <script>
-    Swal.fire(
-      'Erro!',
-      '{{session('errorAppointment')}}',
-      'error'
-    );
-  </script>
-@elseif(session('successAppointment'))
-  <script>
-    Swal.fire(
-      'Sucesso!',
-      '{{session('successAppointment')}}',
-      'success'
-    );
-  </script>
-@endif
+  <script src="{{ asset('site/js/atendimento.js') }}"></script>
+  
 </body>
 
 </html>

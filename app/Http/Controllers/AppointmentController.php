@@ -126,7 +126,7 @@ class AppointmentController extends Controller
             $nomecompleto = explode(' ', ucfirst(strtolower($appointment->doctor_name)));
             $nome = 'Dr. '.$nomecompleto[0];
             $appointment->doctor_name = $nome;
-            $appointment->telefone = $appointment->telefone > 0?PatientController::mascara('(##) # ####-####', $doctor->telefone) : 'Sem telefone cadastrado';
+            $appointment->telefone = $appointment->telefone > 0?PatientController::mascara('(##) # ####-####', $appointment->telefone) : 'Sem telefone cadastrado';
         }
         return response()->json($appointments);
         
@@ -156,9 +156,17 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show(Request $request)
     {
-        
+        $dateNow = Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString());
+        $appointment = DB::table('appointment')
+            ->join('patient', 'appointment.patient', '=', 'patient.id')
+            ->join('doctor', 'appointment.doctor', '=', 'doctor.id')
+            ->select('appointment.*', 'appointment.status as status_a', 'patient.*')
+            ->where('ticket', $request->ticket)
+            ->where('appointment.data', $dateNow)
+            ->get();
+        return response()->json($appointment);
     }
 
     /**
@@ -191,14 +199,14 @@ class AppointmentController extends Controller
             ->join('doctor', 'appointment.doctor', '=', 'doctor.id')
             ->select('appointment.*', 'patient.nome as patient_name', 'patient.telefone', 'doctor.nome as doctor_name')
             ->where('appointment.data', $dateNow)
-            ->where('appointment.status', "!=" , null)
             ->get();
         foreach($appointments as $appointment){
             $nomecompleto = explode(' ', ucfirst(strtolower($appointment->doctor_name)));
             $nome = 'Dr. '.$nomecompleto[0];
             $appointment->doctor_name = $nome;
+            $appointment->telefone = $appointment->telefone > 0?PatientController::mascara('(##) # ####-####', $appointment->telefone) : 'Sem telefone cadastrado';
         }
-        return response()->json($appointment);
+        return response()->json($appointments);
     }
 
     /**
