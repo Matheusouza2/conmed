@@ -13,7 +13,7 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('attendance', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('doctor');
             $table->integer('patient');
@@ -24,6 +24,8 @@ class CreateAttendancesTable extends Migration
             $table->string('images')->nullable();
             $table->string('hash')->nullable();
             $table->timestamps();
+            $table->foreign('patient')->references('id')->on('patient');
+            $table->foreign('doctor')->references('id')->on('doctor');
         });
     }
 

@@ -322,28 +322,32 @@
                         </div>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <span class="badge badge-default badge-lg mb-2" id="dateNow">Data: {{ date('d/m/Y') }}</span>
                                 <textarea class="form-control" name="anamnesis" id="anamnesis" cols="40" rows="4" placeholder="Realiza aqui a anamnese do paciente"></textarea>
                                 <div class="text-right">
-                                    <a href="javascript:void(0)" onClick="saveAnamnesis()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                    <a href="javascript:void(0)" onClick="saveField()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
                                 </div>
-
-                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
-                                <textarea class="form-control" name="" id="" cols="40" rows="4" placeholder="Realiza aqui a anamnese do paciente" readonly></textarea>
-
+                                <div id="anam">
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
+                                <span class="badge badge-default badge-lg mb-2">Data: {{ date('d/m/Y') }}</span>
                                 <textarea class="form-control" name="exams" id="exams" cols="40" rows="4" placeholder="Utilize esse campo para prescrever exames"></textarea>
                                 <div class="text-right">
-                                    <a href="javascript:void(0)" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                    <a href="javascript:void(0)" onClick="saveField()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                    <a href="javascript:void(0)" onClick="saveField()" id="geraExame" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Requerimento</a>
+                                </div>
+                                <div id="exam">
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
-                                <span class="badge badge-default badge-lg mb-2">Data: 16/03/2021</span>
-                                <textarea class="form-control" name="medicines" id="medicines" cols="40" rows="4" placeholder="Prescreva medicamentos se necessario"></textarea>
+                                <span class="badge badge-default badge-lg mb-2">Data: {{ date('d/m/Y') }}</span>
+                                <textarea class="form-control" name="medicines" id="medicines" cols="40" rows="4" placeholder="Descrever o medicamento em uma linha e a forma de aplicação em outra"></textarea>
                                 <div class="text-right">
-                                    <a href="javascript:void(0)" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                    <a href="javascript:void(0)" onClick="saveField()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
+                                    <a href="javascript:void(0)" onClick="saveField()" id="geraReceita" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Receita</a>
+                                </div>
+                                <div id="med">
                                 </div>
                             </div>
                         </div>

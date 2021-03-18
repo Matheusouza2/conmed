@@ -21,6 +21,8 @@ class CreateTableAppointments extends Migration
             $table->string('ticket');
             $table->string('status')->nullable();
             $table->timestamps();
+            $table->foreign('patient')->references('id')->on('patient');
+            $table->foreign('doctor')->references('id')->on('doctor');
         });
     }
 

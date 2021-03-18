@@ -19,7 +19,7 @@ $('#data').datepicker({
         '<td>'+obj.telefone+'</td>'+
         '<td>'+obj.doctor_name+'</td>'+
         '<td hidden="true">'+obj.id+'</td>'+
-        '</tr>'
+        '</tr>';
       });
       $('#waitingroom').html(table).show();
       $('#alert-loading').attr('hidden', true);
@@ -158,7 +158,7 @@ $('#data').datepicker({
       return;
     }else if(situacao != 'A caminho'){
       Swal.fire('Ação não permitida', 'Pacientes em atendimento ou já atendidos não podem voltar para a fila de espera !', 'info');
-      
+      return;
     }
 
       

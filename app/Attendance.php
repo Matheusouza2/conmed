@@ -11,6 +11,7 @@ class Attendance extends Model
     protected $fillable = [
         "doctor",
         "patient",
+        "data",
         "anamnesis",
         "medicines",
         "exams",

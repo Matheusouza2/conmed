@@ -60,3 +60,7 @@ Route::put('/admin/appointment/update', 'AppointmentController@update')->name('u
 * ROTA RESPONSAVEL PELA TELA DE ATENDIMENTO MEDICO
 */
 Route::view('/atendimento', 'doctor.atendimento')->name('atendimentoView');
+Route::get('/atendimento/show','AttendanceController@show')->name('attendanceShow');
+Route::get('/atendimento/showAll','AttendanceController@showAll')->name('attendanceShowAll');
+Route::post('/atendimento/store','AttendanceController@store')->name('attendanceStore');
+Route::post('/atendimento/update','AttendanceController@update')->name('attendanceUpdate');
