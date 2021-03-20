@@ -316,7 +316,7 @@
                               <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                               </div>
-                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text" required>
+                              <input class="form-control" id="data" name="data" placeholder="Selecione uma data" type="text" required autocomplete="false">
                               <div class="invalid-feedback">
                                 Campo de preenchimento obrigatório
                               </div>

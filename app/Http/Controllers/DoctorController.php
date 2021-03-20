@@ -99,6 +99,7 @@ class DoctorController extends Controller
         $doctor->situacao = $request->situacao;
         $doctor->telefone = $request->telefone;
         $doctor->observacoes = $request->observacoes;
+        $doctor->especialidade = $request->especialidade;
         $doctor->save();
         
         return redirect()->route('listDoctors');

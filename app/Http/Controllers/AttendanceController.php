@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PDF;
 
 class AttendanceController extends Controller
 {
@@ -49,7 +50,7 @@ class AttendanceController extends Controller
                 
         $attendance = new Attendance();
         
-        $request['hash'] = Hash::make($dateNow.$appointment[0]->crm.$appointment[0]->patient_cpf);
+        $request['hash'] = AttendanceController::generateKey($dateNow.$appointment[0]->crm.$appointment[0]->patient_cpf);
         $request['doctor'] = $appointment[0]->doctor;
         $request['patient'] = $appointment[0]->patient;
         $request['data'] = $dateNow;
@@ -95,14 +96,33 @@ class AttendanceController extends Controller
     {
         $dateNow = Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString());
         $attendance = DB::table('attendance')
-            ->join('patient', 'attendance.patient', '=', 'patient.id')
-            ->join('doctor', 'attendance.doctor', '=', 'doctor.id')
-            ->select('attendance.*', 'patient.*')
+            ->select('attendance.*')
             ->where('patient', $request->patient)
             ->get();
         return response()->json($attendance);
     }
 
+    /**
+     * Display rels .
+     *
+     * @param  \App\attendance  $attendance
+     * @return \Illuminate\Http\Response
+     */
+    public function relatorio(Request $request)
+    {   
+        $attendance = DB::table('attendance')
+                               ->join('patient', 'attendance.patient', '=', 'patient.id')
+                              ->join('doctor', 'attendance.doctor', '=', 'doctor.id')
+                             ->select('attendance.*', 'doctor.nome as doctor_name', 'doctor.crm', 'doctor.especialidade')
+                            ->where('attendance.id', $request->data)
+                           ->get();
+
+        $nomecompleto = explode(' ', ucfirst(strtolower($attendance[0]->doctor_name)));
+        $nome = 'Dr. '.$nomecompleto[0].' '.ucfirst($nomecompleto[1]);
+        $attendance[0]->doctor_name = $nome;
+        $attendance[0]->type = $request->type;
+        return view('pdf/receita', compact('attendance'));        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -144,5 +164,22 @@ class AttendanceController extends Controller
     public function destroy(attendance $attendance)
     {
         //
+    }
+
+    public static function generateKey($val)
+    {
+        $hash = strtoupper(md5($val));
+        $for = str_split($hash);
+        $new = '';
+        for($i = 0; $i < count($for); $i++){
+            $new .= $for[$i];
+            if($i == 7){
+                $new .= '-'.$for[$i];
+            }
+            if($i == 14){
+                break;
+            }
+        }
+        return $new;
     }
 }

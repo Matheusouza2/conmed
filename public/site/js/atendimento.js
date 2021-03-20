@@ -37,15 +37,17 @@ setInterval(function(){
                   dataType: 'json',
                   success: function success(data2) {
                     var anam = "", exams = "", med = "";
-                    $.each(data2, function(i,obj2) {
+                    $.each(data2, function(i,obj2) { 
                       anam += '<span class="badge badge-default badge-lg mb-2 mt-4">Data: '+obj2.data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1')+'</span>'+
                       '<textarea class="form-control" name="" id="" cols="40" rows="4" readonly>'+obj2.anamnesis+'</textarea>';
-
+                      var dataLocal = obj2.data.replace(/(\d*)-(\d*)-(\d*).*/, '$1-$2-$3');
                       exams += '<span class="badge badge-default badge-lg mb-2 mt-4">Data: '+obj2.data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1')+'</span>'+
-                      '<textarea class="form-control" name="" id="" cols="40" rows="4" readonly>'+obj2.exams+'</textarea>';
-
+                      '<textarea class="form-control" name="" id="" cols="40" rows="4" readonly>'+obj2.exams+'</textarea>'+
+                      '<a href="/atendimento/relatorio/'+obj2.id+'/exams" target="_blank" id="geraReceita" title="Clique para gerar a receita" class="btn btn-warning btn-sm my-4">Gerar Requirimento</a>';
+                      
                       med += '<span class="badge badge-default badge-lg mb-2 mt-4">Data: '+obj2.data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1')+'</span>'+
-                      '<textarea class="form-control" name="" id="" cols="40" rows="4" readonly>'+obj2.medicines+'</textarea>';
+                      '<textarea class="form-control" name="" id="" cols="40" rows="4" readonly>'+obj2.medicines+'</textarea>'+
+                      '<a href="/atendimento/relatorio/'+obj2.id+'/meds" target="_blank" id="geraReceita" title="Clique para gerar a receita" class="btn btn-warning btn-sm my-4">Gerar Receita</a>';
                     });
                     $('#anam').html(anam).show();
                     $('#exam').html(exams).show();
@@ -173,6 +175,25 @@ function saveField() {
       }else if($("#anamnesis").val() != ""){
         $("#anamnesis").attr('readonly', true);
       }
+      console.log(data);
+    },
+    error: function error(data) {
+      console.log(data);
+    }
+  });
+}
+
+function gerarRel(date, type) {
+  $.ajax({
+    url: 'atendimento/relatorio',
+    data: {
+      "_token" : $('meta[name="csrf-token"]').attr('content'),
+      "data" : date,
+      "type":type
+    },
+    method: 'GET',
+    dataType: 'json',
+    success: function success(data) {
       console.log(data);
     },
     error: function error(data) {

@@ -335,7 +335,7 @@
                                 <textarea class="form-control" name="exams" id="exams" cols="40" rows="4" placeholder="Utilize esse campo para prescrever exames"></textarea>
                                 <div class="text-right">
                                     <a href="javascript:void(0)" onClick="saveField()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
-                                    <a href="javascript:void(0)" onClick="saveField()" id="geraExame" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Requerimento</a>
+                                    <a href="javascript:void(0)" onClick="gerarRel('{{ date('Y-m-d') }}', 'exams')" id="geraExame" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Requerimento</a>
                                 </div>
                                 <div id="exam">
                                 </div>
@@ -345,7 +345,7 @@
                                 <textarea class="form-control" name="medicines" id="medicines" cols="40" rows="4" placeholder="Descrever o medicamento em uma linha e a forma de aplicação em outra"></textarea>
                                 <div class="text-right">
                                     <a href="javascript:void(0)" onClick="saveField()" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-success btn-sm my-4">Salvar</a>
-                                    <a href="javascript:void(0)" onClick="saveField()" id="geraReceita" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Receita</a>
+                                    <a href="javascript:void(0)" onClick="gerarRel('{{ date('Y-m-d') }}', 'medicines')" id="geraReceita" title="Após clicar em salvar esse campo não poderá mais ser alterado" class="btn btn-warning btn-sm my-4" hidden="true">Gerar Receita</a>
                                 </div>
                                 <div id="med">
                                 </div>

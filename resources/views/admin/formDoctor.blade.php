@@ -306,7 +306,7 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="form-group">
-                            <label class="form-control-label" for="uf">UF</label>
+                            <label class="form-control-label" for="uf">UF do CRM</label>
                             <select class="form-control" name="uf" id="uf">
                                 <option value="AC">AC</option> <option value="AL">AL</option> <option value="AP">AP</option> <option value="AM">AM</option> 
                                 <option value="BA">BA</option> <option value="CE">CE</option> <option value="DF">DF</option> <option value="ES">ES</option> 
@@ -355,6 +355,14 @@
                           <div class="form-group">
                             <label class="form-control-label" for="idade">Situação do CRM</label>
                             <input type="text" id="situacao" name="situacao" class="form-control" readonly="true">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="idade">Especialidade</label>
+                            <input type="text" id="especialidade" name="especialidade" class="form-control">
                           </div>
                         </div>
                       </div>
@@ -470,6 +478,7 @@
     $('#telefone').val('{{ $doctor->telefone }}');
     $('#observacoes').val('{{ $doctor->observacoes }}');
     $('#uf').val('{{ $doctor->uf }}');
+    $('#especialidade').val('{{ $doctor->especialidade }}');
     $('#form').attr('action','{{ route('editDoctor', ['doctor' => $doctor->id]) }}');
     $('#cpf').attr('readonly', true);
   </script>
