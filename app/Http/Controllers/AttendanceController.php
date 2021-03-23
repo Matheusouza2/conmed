@@ -64,7 +64,7 @@ class AttendanceController extends Controller
             return response()->json('error');
         }
     
-        return response()->json('success');
+        return response()->json('success', compact($request['hash']));
     }
 
     /**
@@ -122,6 +122,30 @@ class AttendanceController extends Controller
         $attendance[0]->doctor_name = $nome;
         $attendance[0]->type = $request->type;
         return view('pdf/receita', compact('attendance'));        
+    }
+    /**
+     * AUTENTICATION DOC
+     */
+    public function autentication(Request $request)
+    {   
+        
+        $attendance = DB::table('attendance')
+                            ->join('patient', 'attendance.patient', '=', 'patient.id')
+                            ->join('doctor', 'attendance.doctor', '=', 'doctor.id')
+                            ->select('attendance.*', 'doctor.nome as doctor_name', 'doctor.crm', 'doctor.especialidade', 'patient.nome as patient_name')
+                            ->where('attendance.hash', $request->hash)
+                            ->get();
+        if(count($attendance) > 0){
+            $nomecompleto = explode(' ', ucfirst(strtolower($attendance[0]->doctor_name)));
+            $nome = 'Dr. '.$nomecompleto[0].' '.ucfirst($nomecompleto[1]);
+            $attendance[0]->doctor_name = $nome;
+            $attendance[0]->type = $request->type;
+            $attendance[0]->medicines = preg_replace("/\r?\n/","@", $attendance[0]->medicines);
+            $attendance[0]->exams = preg_replace("/\r?\n/","@", $attendance[0]->exams);
+        }else{
+            $attendance = null;
+        }
+        return view('autenticationDocument', compact('attendance'));        
     }
 
     /**

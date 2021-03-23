@@ -65,3 +65,10 @@ Route::get('/atendimento/showAll','AttendanceController@showAll')->name('attenda
 Route::get('/atendimento/relatorio/{data}/{type}', 'AttendanceController@relatorio')->name('relatorio');
 Route::post('/atendimento/store','AttendanceController@store')->name('attendanceStore');
 Route::post('/atendimento/update','AttendanceController@update')->name('attendanceUpdate');
+
+/**
+ * ROTA RESPONSAVEL PELA VALIDAÇÃO DOS DOCUMENTOS EMITIDOS
+ */
+
+Route::view('/autenticacao', 'autenticationDocument')->name('viewAutentication');
+Route::get('/autenticacao/{hash}', 'AttendanceController@autentication')->name('autentication');

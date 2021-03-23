@@ -87,7 +87,7 @@
 <div id="t9_1" class="t s5">acesse:</div>
 <div id="ta_1" class="t s6">http://conmed.herokuapp.com/autenticacao</div>
 <div id="tb_1" class="t s5">e informe a chave a baixo. </div>
-<div id="tb_2" class="t s5">Chave: {{ $attendance[0]->hash }}</div>
+<div id="tb_2" class="t s5"><strong>Chave: {{ $attendance[0]->hash }}</strong></div>
 <div id="tc_1" class="t s5">Ou leia o Qrcode com o seu celular</div>
 <div id="qr" class="t s5"><img src="https://chart.googleapis.com/chart?chs=140x140&cht=qr&chl=http://conmed.herokuapp.com/autenticacao/{{ $attendance[0]->hash }}"></div>
 @if($attendance[0]->type == 'meds')
